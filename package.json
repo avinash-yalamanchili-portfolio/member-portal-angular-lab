@@ -1,0 +1,44 @@
+{
+  "name": "member-portal-angular-lab",
+  "version": "1.0.0",
+  "description": "Clean-room Angular learning project built one concept at a time.",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "20.3.34",
+    "@angular/common": "20.3.34",
+    "@angular/compiler": "20.3.34",
+    "@angular/core": "20.3.34",
+    "@angular/forms": "20.3.34",
+    "@angular/platform-browser": "20.3.34",
+    "@angular/platform-browser-dynamic": "20.3.34",
+    "@angular/router": "20.3.34",
+    "rxjs": "7.8.1",
+    "tslib": "2.3.0",
+    "zone.js": "0.15.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "20.3.41",
+    "@angular/cli": "20.3.41",
+    "@angular/compiler-cli": "20.3.34",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9 <21"
+  }
+}
