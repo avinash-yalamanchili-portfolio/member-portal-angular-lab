@@ -1,11 +1,51 @@
 <main class="welcome-shell">
   <section class="welcome-card">
-    <p class="eyebrow">Day 1 · Angular foundation</p>
+    <p class="eyebrow">{{ lesson }}</p>
     <h1>{{ title }}</h1>
     <p>
-      This clean-room learning project starts with an NgModule, one root
-      component, and an empty router. We will add one concept at a time.
+      The component class holds data and behavior. Angular connects that class
+      to this HTML template through bindings.
     </p>
-    <div class="status" role="status">Angular is running successfully.</div>
+
+    <article class="member-card">
+      <div class="member-card__heading">
+        <div>
+          <span class="label">Sample member</span>
+          <h2>{{ member.name }}</h2>
+        </div>
+
+        <button
+          type="button"
+          class="toggle-button"
+          [attr.aria-expanded]="showDetails"
+          (click)="toggleDetails()"
+        >
+          {{ showDetails ? 'Hide details' : 'Show details' }}
+        </button>
+      </div>
+
+      <dl *ngIf="showDetails" class="member-details">
+        <div>
+          <dt>Member ID</dt>
+          <dd>{{ member.memberId }}</dd>
+        </div>
+        <div>
+          <dt>Plan</dt>
+          <dd>{{ member.planName }}</dd>
+        </div>
+      </dl>
+    </article>
+
+    <div class="status" role="status">{{ statusMessage }}</div>
+
+    <aside class="binding-guide" aria-labelledby="binding-guide-title">
+      <h2 id="binding-guide-title">What Angular is doing</h2>
+      <ul>
+        <li><code>{{ '{{ value }}' }}</code> displays TypeScript data.</li>
+        <li><code>[property]</code> sets an HTML property from TypeScript.</li>
+        <li><code>(event)</code> calls a TypeScript method.</li>
+        <li><code>*ngIf</code> adds or removes HTML based on a condition.</li>
+      </ul>
+    </aside>
   </section>
 </main>

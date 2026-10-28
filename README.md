@@ -18,6 +18,17 @@ The first version contains only:
 - an empty `AppRoutingModule` for future routes
 - one component test
 
+## Day 2: Components and template binding
+
+The root component now demonstrates how its TypeScript class connects to its
+HTML template:
+
+- interpolation displays component data with `{{ value }}`
+- property binding sets an element property with `[property]="value"`
+- event binding calls a component method with `(event)="method()"`
+- `*ngIf` conditionally adds or removes template content
+- component tests verify the rendered data and button behavior
+
 ## Requirements
 
 - Node.js 20.9 or later within the Node 20 release line
