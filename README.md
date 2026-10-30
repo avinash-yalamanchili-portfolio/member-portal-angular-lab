@@ -9,9 +9,10 @@ information.
 
 ## Current capabilities
 
-- responsive member dashboard and primary navigation
+- responsive member dashboard and route-based navigation
 - coverage and plan summary
 - claims, messages, and benefits overview
+- claims workspace with status filters and financial summaries
 - recent account activity
 - expandable member information
 - component tests for dashboard content and interactions
@@ -21,7 +22,7 @@ information.
 - Angular 20 with TypeScript
 - traditional `NgModule` application structure
 - SCSS component styling
-- Angular Router prepared for feature routes
+- Angular Router with dashboard and claims feature routes
 - Jasmine and Karma component tests
 
 ## Requirements

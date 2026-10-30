@@ -1,0 +1,79 @@
+<main class="claims-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">Claims center</p>
+      <h1>Claims</h1>
+      <p>Review claim status, provider charges, and your responsibility.</p>
+    </div>
+    <a class="back-link" routerLink="/overview">Back to overview</a>
+  </header>
+
+  <section class="claim-totals" aria-label="Claims totals">
+    <article>
+      <span>Total claims</span>
+      <strong>{{ claims.length }}</strong>
+    </article>
+    <article>
+      <span>Total billed</span>
+      <strong>{{ totalBilled | currency }}</strong>
+    </article>
+    <article>
+      <span>Your responsibility</span>
+      <strong>{{ totalMemberResponsibility | currency }}</strong>
+    </article>
+  </section>
+
+  <section class="claims-panel" aria-labelledby="claims-list-title">
+    <div class="panel-heading">
+      <div>
+        <p class="section-label">Claim history</p>
+        <h2 id="claims-list-title">Recent claims</h2>
+      </div>
+
+      <div class="filter-group" aria-label="Filter claims by status">
+        <button
+          *ngFor="let filter of filters"
+          type="button"
+          [class.active]="selectedFilter === filter"
+          [attr.aria-pressed]="selectedFilter === filter"
+          (click)="selectFilter(filter)"
+        >
+          {{ filter }}
+        </button>
+      </div>
+    </div>
+
+    <div class="claims-table" role="table" aria-label="Recent claims">
+      <div class="table-header" role="row">
+        <span role="columnheader">Claim and provider</span>
+        <span role="columnheader">Service</span>
+        <span role="columnheader">Status</span>
+        <span role="columnheader">Your cost</span>
+      </div>
+
+      <article *ngFor="let claim of filteredClaims" class="claim-row" role="row">
+        <div class="claim-provider" role="cell">
+          <strong>{{ claim.id }}</strong>
+          <span>{{ claim.provider }}</span>
+        </div>
+        <div role="cell">
+          <strong>{{ claim.service }}</strong>
+          <span>{{ claim.serviceDate }}</span>
+        </div>
+        <div role="cell">
+          <span class="status" [class.in-review]="claim.status === 'In review'">
+            {{ claim.status }}
+          </span>
+        </div>
+        <div class="amount" role="cell">
+          <strong>{{ claim.memberResponsibility | currency }}</strong>
+          <span>{{ claim.billedAmount | currency }} billed</span>
+        </div>
+      </article>
+
+      <p *ngIf="filteredClaims.length === 0" class="empty-state">
+        No claims match this status.
+      </p>
+    </div>
+  </section>
+</main>

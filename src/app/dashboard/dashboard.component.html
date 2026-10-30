@@ -1,0 +1,64 @@
+<main class="dashboard">
+  <section class="dashboard-heading">
+    <div>
+      <p class="eyebrow">Account overview</p>
+      <h1>Welcome back, {{ member.firstName }}</h1>
+      <p>Review your coverage, claims, benefits, and account activity.</p>
+    </div>
+    <span class="coverage-badge">{{ member.coverageStatus }} coverage</span>
+  </section>
+
+  <section class="member-card" aria-labelledby="member-card-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Member information</p>
+        <h2 id="member-card-title">{{ member.fullName }}</h2>
+      </div>
+      <button
+        type="button"
+        class="secondary-button"
+        [attr.aria-expanded]="showMemberDetails"
+        aria-controls="member-details"
+        (click)="toggleMemberDetails()"
+      >
+        {{ showMemberDetails ? 'Hide details' : 'Show details' }}
+      </button>
+    </div>
+
+    <dl *ngIf="showMemberDetails" id="member-details" class="member-details">
+      <div><dt>Member ID</dt><dd>{{ member.memberId }}</dd></div>
+      <div><dt>Plan</dt><dd>{{ member.planName }}</dd></div>
+      <div><dt>Effective date</dt><dd>{{ member.effectiveDate }}</dd></div>
+    </dl>
+  </section>
+
+  <section class="summary-grid" aria-label="Account summary">
+    <article *ngFor="let summary of summaries" class="summary-card">
+      <p>{{ summary.label }}</p>
+      <strong>{{ summary.value }}</strong>
+      <span>{{ summary.description }}</span>
+    </article>
+  </section>
+
+  <section class="activity-card" aria-labelledby="activity-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Account updates</p>
+        <h2 id="activity-title">Recent activity</h2>
+      </div>
+      <a class="text-link" routerLink="/claims">View claims</a>
+    </div>
+
+    <ul class="activity-list">
+      <li *ngFor="let activity of recentActivity">
+        <div class="activity-icon" aria-hidden="true"></div>
+        <div class="activity-description">
+          <strong>{{ activity.title }}</strong>
+          <span>{{ activity.description }}</span>
+        </div>
+        <time>{{ activity.date }}</time>
+        <span class="activity-status">{{ activity.status }}</span>
+      </li>
+    </ul>
+  </section>
+</main>
