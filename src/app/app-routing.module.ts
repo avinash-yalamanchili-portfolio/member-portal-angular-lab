@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Feature routes will be added as the lab grows.
+// Feature routes are registered here as portal capabilities are introduced.
 const routes: Routes = [];
 
 @NgModule({

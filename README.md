@@ -1,40 +1,36 @@
-# Member Portal Angular Lab
+# Member Portal
 
-A clean-room Angular learning project built one concept at a time. It uses the
-traditional `NgModule` architecture so the lessons transfer easily to existing
-enterprise Angular applications.
+An Angular member self-service application for managing coverage information,
+claims, benefits, secure messages, and account activity.
 
-This independent educational project contains no proprietary code, branding,
-credentials, internal endpoints, production data, or protected information.
+This is an independent clean-room project. It contains no proprietary code,
+branding, credentials, internal endpoints, production data, or protected
+information.
 
-## Day 1: Angular foundation
+## Current capabilities
 
-The first version contains only:
+- responsive member dashboard and primary navigation
+- coverage and plan summary
+- claims, messages, and benefits overview
+- recent account activity
+- expandable member information
+- component tests for dashboard content and interactions
 
-- Angular 20 configured with Node 20
-- `main.ts`, which starts Angular
-- `AppModule`, the root module
-- `AppComponent`, the root component
-- an empty `AppRoutingModule` for future routes
-- one component test
+## Architecture
 
-## Day 2: Components and template binding
-
-The root component now demonstrates how its TypeScript class connects to its
-HTML template:
-
-- interpolation displays component data with `{{ value }}`
-- property binding sets an element property with `[property]="value"`
-- event binding calls a component method with `(event)="method()"`
-- `*ngIf` conditionally adds or removes template content
-- component tests verify the rendered data and button behavior
+- Angular 20 with TypeScript
+- traditional `NgModule` application structure
+- SCSS component styling
+- Angular Router prepared for feature routes
+- Jasmine and Karma component tests
 
 ## Requirements
 
 - Node.js 20.9 or later within the Node 20 release line
 - npm 10+
 
-The repository includes `.nvmrc` with Node `20.20.2`, which is compatible with Angular 20.3.
+The repository includes `.nvmrc` with Node `20.20.2`, which is compatible with
+Angular 20.3.
 
 ## Run locally
 
@@ -49,6 +45,7 @@ Open `http://localhost:4200`.
 
 ```powershell
 npm run build
+npm run test:ci
 ```
 
 ## License

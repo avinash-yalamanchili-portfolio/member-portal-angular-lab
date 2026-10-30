@@ -1,7 +1,7 @@
 {
   "name": "member-portal-angular-lab",
   "version": "1.0.0",
-  "description": "Clean-room Angular learning project built one concept at a time.",
+  "description": "Angular member self-service portal for coverage, claims, benefits, and account activity.",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

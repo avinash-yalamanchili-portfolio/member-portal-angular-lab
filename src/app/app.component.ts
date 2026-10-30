@@ -1,5 +1,18 @@
 import { Component } from '@angular/core';
 
+interface DashboardSummary {
+  label: string;
+  value: string;
+  description: string;
+}
+
+interface MemberActivity {
+  title: string;
+  description: string;
+  date: string;
+  status: 'Complete' | 'Available' | 'New';
+}
+
 @Component({
   standalone: false,
   selector: 'app-root',
@@ -7,22 +20,47 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Member Portal Angular Lab';
-  lesson = 'Day 2 · Components and template binding';
+  title = 'Member Portal';
 
   member = {
-    name: 'Jordan Lee',
-    memberId: 'LAB-1001',
-    planName: 'Sample Health Plan'
+    firstName: 'Jordan',
+    fullName: 'Jordan Lee',
+    memberId: 'MP-1001',
+    planName: 'Essential Plus',
+    coverageStatus: 'Active',
+    effectiveDate: 'January 1, 2026'
   };
 
-  showDetails = true;
-  statusMessage = 'The component supplied this data to the template.';
+  summaries: DashboardSummary[] = [
+    { label: 'Claims', value: '3', description: '1 recently processed' },
+    { label: 'Messages', value: '2', description: 'Unread messages' },
+    { label: 'Benefits', value: '12', description: 'Covered services available' }
+  ];
 
-  toggleDetails(): void {
-    this.showDetails = !this.showDetails;
-    this.statusMessage = this.showDetails
-      ? 'Member details are visible.'
-      : 'Member details are hidden.';
+  recentActivity: MemberActivity[] = [
+    {
+      title: 'Claim processed',
+      description: 'Office visit claim ending in 1842',
+      date: 'Oct 27, 2026',
+      status: 'Complete'
+    },
+    {
+      title: 'Explanation of benefits',
+      description: 'A new document is ready to view',
+      date: 'Oct 24, 2026',
+      status: 'Available'
+    },
+    {
+      title: 'Secure message',
+      description: 'You have a new account message',
+      date: 'Oct 21, 2026',
+      status: 'New'
+    }
+  ];
+
+  showMemberDetails = true;
+
+  toggleMemberDetails(): void {
+    this.showMemberDetails = !this.showMemberDetails;
   }
 }
