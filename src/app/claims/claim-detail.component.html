@@ -1,0 +1,56 @@
+<main class="claim-detail-page">
+  <a class="back-link" routerLink="/claims">Back to claims</a>
+
+  <ng-container *ngIf="claim; else claimNotFound">
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">Claim details</p>
+        <h1>{{ claim.id }}</h1>
+        <p>{{ claim.provider }}</p>
+      </div>
+      <span class="status" [class.in-review]="claim.status === 'In review'" [class.denied]="claim.status === 'Denied'">
+        {{ claim.status }}
+      </span>
+    </header>
+
+    <section class="claim-overview" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Service information</p>
+          <h2 id="overview-title">{{ claim.service }}</h2>
+        </div>
+        <span>{{ claim.serviceDate }}</span>
+      </div>
+
+      <dl class="claim-metadata">
+        <div><dt>Provider</dt><dd>{{ claim.provider }}</dd></div>
+        <div><dt>Service date</dt><dd>{{ claim.serviceDate }}</dd></div>
+        <div><dt>Processed date</dt><dd>{{ claim.processedDate || 'Pending' }}</dd></div>
+        <div><dt>Reference number</dt><dd>{{ claim.referenceNumber }}</dd></div>
+      </dl>
+    </section>
+
+    <section class="cost-breakdown" aria-labelledby="cost-title">
+      <div>
+        <p class="section-label">Financial summary</p>
+        <h2 id="cost-title">Cost breakdown</h2>
+      </div>
+      <dl>
+        <div><dt>Provider billed</dt><dd>{{ claim.billedAmount | currency }}</dd></div>
+        <div><dt>Plan allowed</dt><dd>{{ claim.allowedAmount | currency }}</dd></div>
+        <div><dt>Plan paid</dt><dd>{{ claim.planPaid | currency }}</dd></div>
+        <div class="member-cost"><dt>Your responsibility</dt><dd>{{ claim.memberResponsibility | currency }}</dd></div>
+      </dl>
+      <p class="disclaimer">This summary is not a bill. Review the explanation of benefits for final processing details.</p>
+    </section>
+  </ng-container>
+
+  <ng-template #claimNotFound>
+    <section class="not-found">
+      <p class="eyebrow">Claim unavailable</p>
+      <h1>We could not find this claim</h1>
+      <p>The claim number may be invalid or no longer available.</p>
+      <a routerLink="/claims">Return to claims</a>
+    </section>
+  </ng-template>
+</main>

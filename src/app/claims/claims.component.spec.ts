@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ClaimsComponent } from './claims.component';
 
 describe('ClaimsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ClaimsComponent],
-      imports: [RouterModule.forRoot([])]
+      imports: [CommonModule, FormsModule, RouterModule.forRoot([])]
     }).compileComponents();
   });
 
@@ -24,6 +26,14 @@ describe('ClaimsComponent', () => {
 
     expect(fixture.componentInstance.filteredClaims.length).toBe(1);
     expect(fixture.nativeElement.querySelectorAll('.claim-row').length).toBe(1);
-    expect(fixture.nativeElement.textContent).toContain('CLM-1761');
+    expect(fixture.nativeElement.textContent).toContain('DEMO-CLM-003');
+  });
+
+  it('should search claims by provider', () => {
+    const fixture = TestBed.createComponent(ClaimsComponent);
+    fixture.componentInstance.searchTerm = 'diagnostic';
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.filteredClaims.length).toBe(2);
   });
 });

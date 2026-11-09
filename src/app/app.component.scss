@@ -113,6 +113,7 @@ a:focus-visible {
   }
 
   .primary-nav a {
-    min-width: 110px;
+    flex: 1;
+    min-width: 0;
   }
 }

@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [RouterModule.forRoot([])]
+      imports: [CommonModule, RouterModule.forRoot([])]
     }).compileComponents();
   });
 

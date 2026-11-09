@@ -1,0 +1,46 @@
+.benefits-page { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 52px 0 72px; }
+.page-heading,
+.section-heading,
+.coverage-heading { display: flex; gap: 24px; align-items: center; justify-content: space-between; }
+.page-heading { align-items: flex-start; margin-bottom: 30px; }
+.eyebrow,
+.section-label { margin: 0; color: #236879; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+h1 { margin: 7px 0 10px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; }
+h2 { margin: 5px 0 0; font-size: 1.35rem; }
+h3 { margin: 0; font-size: 1.15rem; }
+p { margin: 0; color: #52656e; line-height: 1.6; }
+.plan-badge { padding: 9px 13px; color: #215c3f; font-size: 0.85rem; font-weight: 800; background: #e9f7ee; border: 1px solid #b9dfc8; border-radius: 999px; }
+.cost-summary { padding: 28px; margin-bottom: 32px; background: #ffffff; border: 1px solid #d9e2e6; border-radius: 14px; box-shadow: 0 10px 30px rgba(31, 55, 68, 0.06); }
+.section-heading > span,
+.coverage-heading > span { color: #687b83; font-size: 0.85rem; font-weight: 700; }
+.progress-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 26px; }
+.progress-heading { display: flex; gap: 16px; justify-content: space-between; margin-bottom: 12px; }
+.progress-heading span { color: #52656e; font-weight: 700; }
+.progress-track { height: 10px; overflow: hidden; background: #e5ecef; border-radius: 999px; }
+.progress-track span { display: block; height: 100%; background: #39845e; border-radius: inherit; }
+.progress-grid small { display: block; margin-top: 8px; color: #687b83; }
+.coverage-heading { margin-bottom: 18px; }
+.benefit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.benefit-card { display: grid; gap: 22px; padding: 24px; background: #ffffff; border: 1px solid #d9e2e6; border-radius: 14px; }
+.benefit-card > div { display: grid; gap: 7px; }
+.benefit-card dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.benefit-card dl div { padding: 13px; background: #f4f7f8; border-radius: 8px; }
+dt { color: #687b83; font-size: 0.75rem; font-weight: 700; }
+dd { margin: 5px 0 0; font-weight: 800; }
+summary { color: #236879; font-weight: 800; cursor: pointer; }
+ul { margin: 12px 0 0; padding-left: 20px; color: #52656e; }
+li + li { margin-top: 7px; }
+
+@media (max-width: 760px) {
+  .benefits-page { width: min(100% - 32px, 1120px); padding-top: 36px; }
+  .page-heading { flex-direction: column; }
+  .progress-grid,
+  .benefit-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .benefits-page { padding-bottom: 96px; }
+  .cost-summary { padding: 22px 18px; }
+  .benefit-card dl { grid-template-columns: 1fr; }
+  .progress-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+}

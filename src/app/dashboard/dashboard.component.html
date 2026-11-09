@@ -33,11 +33,15 @@
   </section>
 
   <section class="summary-grid" aria-label="Account summary">
-    <article *ngFor="let summary of summaries" class="summary-card">
+    <a
+      *ngFor="let summary of summaries"
+      class="summary-card"
+      [routerLink]="summary.route"
+    >
       <p>{{ summary.label }}</p>
       <strong>{{ summary.value }}</strong>
       <span>{{ summary.description }}</span>
-    </article>
+    </a>
   </section>
 
   <section class="activity-card" aria-labelledby="activity-title">
