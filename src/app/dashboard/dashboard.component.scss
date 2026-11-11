@@ -71,7 +71,7 @@ p { margin: 0; color: #52656e; line-height: 1.6; }
 
 .member-details {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin: 24px 0 0;
 }
@@ -82,7 +82,7 @@ dd { margin: 5px 0 0; font-weight: 800; }
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   margin: 18px 0;
 }
