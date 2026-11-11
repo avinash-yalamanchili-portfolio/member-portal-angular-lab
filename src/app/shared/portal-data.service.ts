@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   BenefitCategory,
   Claim,
+  CoveredMember,
   DashboardSummary,
   MemberActivity,
   MemberProfile,
@@ -71,6 +72,37 @@ export class PortalDataService {
       planPaid: 0,
       memberResponsibility: 395,
       referenceNumber: 'DEMO-REF-004'
+    }
+  ];
+
+  private readonly coveredMembers: CoveredMember[] = [
+    {
+      id: 'DEMO-PERSON-001',
+      displayName: 'Demo Member',
+      relationship: 'Subscriber',
+      memberId: 'DEMO-MEMBER-001',
+      groupNumber: 'DEMO-GROUP-100',
+      planName: 'Essential Plus',
+      coverageStatus: 'Active',
+      effectiveDate: 'January 1, 2026',
+      primaryCareProvider: 'Example Primary Care',
+      rxBin: 'DEMO01',
+      rxPcn: 'EXAMPLE',
+      rxGroup: 'DEMO-RX-01'
+    },
+    {
+      id: 'DEMO-PERSON-002',
+      displayName: 'Demo Dependent',
+      relationship: 'Dependent',
+      memberId: 'DEMO-MEMBER-002',
+      groupNumber: 'DEMO-GROUP-100',
+      planName: 'Essential Plus',
+      coverageStatus: 'Active',
+      effectiveDate: 'January 1, 2026',
+      primaryCareProvider: 'Example Family Practice',
+      rxBin: 'DEMO01',
+      rxPcn: 'EXAMPLE',
+      rxGroup: 'DEMO-RX-01'
     }
   ];
 
@@ -168,6 +200,10 @@ export class PortalDataService {
     }));
   }
 
+  getCoveredMembers(): CoveredMember[] {
+    return this.coveredMembers.map((member) => ({ ...member }));
+  }
+
   getMessages(): SecureMessage[] {
     return this.messages.map((message) => ({ ...message }));
   }
@@ -214,6 +250,7 @@ export class PortalDataService {
 
   getDashboardSummaries(): DashboardSummary[] {
     return [
+      { label: 'Coverage', value: String(this.coveredMembers.length), description: 'Covered members', route: '/coverage' },
       { label: 'Claims', value: String(this.claims.length), description: 'View claim history', route: '/claims' },
       { label: 'Messages', value: String(this.getUnreadMessageCount()), description: 'Unread messages', route: '/messages' },
       { label: 'Benefits', value: String(this.benefits.length), description: 'Coverage categories', route: '/benefits' }

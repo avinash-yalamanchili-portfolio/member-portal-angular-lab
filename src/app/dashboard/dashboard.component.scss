@@ -71,7 +71,7 @@ p { margin: 0; color: #52656e; line-height: 1.6; }
 
 .member-details {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin: 24px 0 0;
 }
@@ -152,6 +152,10 @@ a:focus-visible { outline: 3px solid #e1a95f; outline-offset: 3px; }
   .summary-grid { grid-template-columns: 1fr; }
   .activity-list li { grid-template-columns: auto 1fr auto; }
   .activity-list time { display: none; }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {

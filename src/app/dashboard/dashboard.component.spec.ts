@@ -15,7 +15,7 @@ describe('DashboardComponent', () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('.summary-card').length).toBe(3);
+    expect(fixture.nativeElement.querySelectorAll('.summary-card').length).toBe(4);
     expect(fixture.nativeElement.querySelectorAll('.activity-list li').length).toBe(3);
   });
 });

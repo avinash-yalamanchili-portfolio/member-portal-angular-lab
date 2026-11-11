@@ -10,6 +10,23 @@ export interface MemberProfile {
   effectiveDate: string;
 }
 
+export type CoverageStatus = 'Active' | 'Inactive';
+
+export interface CoveredMember {
+  id: string;
+  displayName: string;
+  relationship: 'Subscriber' | 'Dependent';
+  memberId: string;
+  groupNumber: string;
+  planName: string;
+  coverageStatus: CoverageStatus;
+  effectiveDate: string;
+  primaryCareProvider: string;
+  rxBin: string;
+  rxPcn: string;
+  rxGroup: string;
+}
+
 export interface DashboardSummary {
   label: string;
   value: string;

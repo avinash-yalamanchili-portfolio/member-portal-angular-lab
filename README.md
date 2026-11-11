@@ -10,12 +10,14 @@ information.
 ## Current capabilities
 
 - responsive member dashboard and route-based navigation
-- coverage and plan summary
+- household coverage workspace with member selection
+- front/back digital ID card with copy and print actions
+- persisted coverage preferences using safe browser storage
 - claims, messages, and benefits overview
 - claims workspace with status filters and financial summaries
 - claim search and individual claim cost details
 - benefits workspace with deductible and out-of-pocket tracking
-- typed shared data service for member, claim, and benefit information
+- typed shared data service for member, coverage, claim, and benefit information
 - secure inbox with unread tracking, search, and folder filters
 - message details with mark-as-read behavior
 - local compose and sent-message workflow using synthetic data
@@ -28,7 +30,7 @@ information.
 - Angular 20 with TypeScript
 - traditional `NgModule` application structure
 - SCSS component styling
-- Angular Router with dashboard, claims, benefits, and secure-message routes
+- Angular Router with dashboard, coverage, claims, benefits, and secure-message routes
 - centralized typed feature models and data access service
 - Jasmine and Karma component tests
 

@@ -25,6 +25,15 @@ describe('PortalDataService', () => {
     expect(service.getClaimById('UNKNOWN')).toBeUndefined();
   });
 
+  it('should return independent covered-member collections', () => {
+    const firstResult = service.getCoveredMembers();
+    firstResult[0].displayName = 'Changed';
+    firstResult.pop();
+
+    expect(service.getCoveredMembers().length).toBe(2);
+    expect(service.getCoveredMembers()[0].displayName).toBe('Demo Member');
+  });
+
   it('should track unread messages', () => {
     expect(service.getUnreadMessageCount()).toBe(2);
 

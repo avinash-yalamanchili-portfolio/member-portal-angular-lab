@@ -10,6 +10,7 @@ import { BenefitsComponent } from './benefits/benefits.component';
 import { ClaimDetailComponent } from './claims/claim-detail.component';
 import { MessageDetailComponent } from './messages/message-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { CoverageComponent } from './coverage/coverage.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MessagesComponent } from './messages/messages.component';
     ClaimDetailComponent,
     BenefitsComponent,
     MessagesComponent,
-    MessageDetailComponent
+    MessageDetailComponent,
+    CoverageComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],

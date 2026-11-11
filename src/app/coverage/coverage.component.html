@@ -1,0 +1,87 @@
+<main class="coverage-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">Plan and eligibility</p>
+      <h1>Coverage</h1>
+      <p>Review plan details and access a digital member ID card.</p>
+    </div>
+    <span class="status-badge">{{ selectedMember.coverageStatus }} coverage</span>
+  </header>
+
+  <section class="member-picker" aria-labelledby="covered-members-title">
+    <div>
+      <p class="section-label">Household</p>
+      <h2 id="covered-members-title">Covered members</h2>
+    </div>
+    <div class="member-options" role="list">
+      <button
+        *ngFor="let member of members"
+        type="button"
+        role="listitem"
+        [class.selected]="member.id === selectedMemberId"
+        [attr.aria-pressed]="member.id === selectedMemberId"
+        (click)="selectMember(member.id)"
+      >
+        <span>{{ member.displayName }}</span>
+        <small>{{ member.relationship }}</small>
+      </button>
+    </div>
+  </section>
+
+  <div class="coverage-layout">
+    <section class="id-card-panel" aria-labelledby="id-card-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Wallet card</p>
+          <h2 id="id-card-title">Digital member ID</h2>
+        </div>
+        <div class="side-switch" aria-label="ID card side">
+          <button type="button" [class.active]="cardSide === 'front'" (click)="showCardSide('front')">Front</button>
+          <button type="button" [class.active]="cardSide === 'back'" (click)="showCardSide('back')">Back</button>
+        </div>
+      </div>
+
+      <article class="digital-card" [class.card-back]="cardSide === 'back'">
+        <ng-container *ngIf="cardSide === 'front'; else cardBack">
+          <div class="card-brand"><span>MP</span> Member Portal</div>
+          <p class="card-plan">{{ selectedMember.planName }}</p>
+          <dl class="card-grid">
+            <div class="card-name"><dt>Member</dt><dd>{{ selectedMember.displayName }}</dd></div>
+            <div><dt>Member ID</dt><dd>{{ selectedMember.memberId }}</dd></div>
+            <div><dt>Group</dt><dd>{{ selectedMember.groupNumber }}</dd></div>
+            <div><dt>Effective</dt><dd>{{ selectedMember.effectiveDate }}</dd></div>
+          </dl>
+        </ng-container>
+
+        <ng-template #cardBack>
+          <p class="card-back-title">Pharmacy information</p>
+          <dl class="card-grid pharmacy-grid">
+            <div><dt>Rx BIN</dt><dd>{{ selectedMember.rxBin }}</dd></div>
+            <div><dt>Rx PCN</dt><dd>{{ selectedMember.rxPcn }}</dd></div>
+            <div><dt>Rx Group</dt><dd>{{ selectedMember.rxGroup }}</dd></div>
+          </dl>
+          <p class="support-note">For assistance, sign in to the member portal and open Secure Messages.</p>
+        </ng-template>
+      </article>
+
+      <div class="card-actions">
+        <button type="button" class="primary-button" (click)="copyMemberId()">Copy member ID</button>
+        <button type="button" class="secondary-button" (click)="printCard()">Print card</button>
+        <span aria-live="polite">{{ actionMessage }}</span>
+      </div>
+    </section>
+
+    <section class="plan-panel" aria-labelledby="plan-details-title">
+      <p class="section-label">Current selection</p>
+      <h2 id="plan-details-title">Coverage details</h2>
+      <dl class="detail-list">
+        <div><dt>Plan</dt><dd>{{ selectedMember.planName }}</dd></div>
+        <div><dt>Member type</dt><dd>{{ selectedMember.relationship }}</dd></div>
+        <div><dt>Coverage status</dt><dd><span class="inline-status">{{ selectedMember.coverageStatus }}</span></dd></div>
+        <div><dt>Effective date</dt><dd>{{ selectedMember.effectiveDate }}</dd></div>
+        <div><dt>Primary care provider</dt><dd>{{ selectedMember.primaryCareProvider }}</dd></div>
+      </dl>
+      <a class="benefits-link" routerLink="/benefits">Explore plan benefits <span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+</main>
