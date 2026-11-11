@@ -46,3 +46,20 @@ export interface BenefitCategory {
   outOfNetwork: string;
   services: string[];
 }
+
+export type MessageCategory = 'Claims' | 'Benefits' | 'Account';
+export type MessageFolder = 'Inbox' | 'Sent';
+export type MessageFilter = 'All' | 'Unread' | 'Sent';
+
+export interface SecureMessage {
+  id: string;
+  subject: string;
+  preview: string;
+  body: string;
+  sender: string;
+  receivedDate: string;
+  category: MessageCategory;
+  folder: MessageFolder;
+  isRead: boolean;
+  priority: 'Normal' | 'Important';
+}

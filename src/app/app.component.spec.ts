@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [RouterModule.forRoot([])]
+      imports: [CommonModule, RouterModule.forRoot([])]
     }).compileComponents();
   });
 
@@ -19,5 +20,8 @@ describe('AppComponent', () => {
       'Member Portal'
     );
     expect(fixture.nativeElement.querySelector('router-outlet')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.nav-badge').textContent).toContain(
+      '2'
+    );
   });
 });

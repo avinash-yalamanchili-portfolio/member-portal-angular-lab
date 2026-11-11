@@ -16,6 +16,9 @@ information.
 - claim search and individual claim cost details
 - benefits workspace with deductible and out-of-pocket tracking
 - typed shared data service for member, claim, and benefit information
+- secure inbox with unread tracking, search, and folder filters
+- message details with mark-as-read behavior
+- local compose and sent-message workflow using synthetic data
 - recent account activity
 - expandable member information
 - component tests for dashboard content and interactions
@@ -25,7 +28,7 @@ information.
 - Angular 20 with TypeScript
 - traditional `NgModule` application structure
 - SCSS component styling
-- Angular Router with dashboard, claims, claim details, and benefits routes
+- Angular Router with dashboard, claims, benefits, and secure-message routes
 - centralized typed feature models and data access service
 - Jasmine and Karma component tests
 

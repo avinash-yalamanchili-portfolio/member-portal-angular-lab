@@ -9,6 +9,12 @@
       <a routerLink="/overview" routerLinkActive="active">Overview</a>
       <a routerLink="/claims" routerLinkActive="active">Claims</a>
       <a routerLink="/benefits" routerLinkActive="active">Benefits</a>
+      <a routerLink="/messages" routerLinkActive="active">
+        Messages
+        <span *ngIf="unreadMessageCount" class="nav-badge">
+          {{ unreadMessageCount }}
+        </span>
+      </a>
     </nav>
 
     <button class="profile-button" type="button" aria-label="Open account menu">

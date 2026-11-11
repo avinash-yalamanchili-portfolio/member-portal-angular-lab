@@ -58,6 +58,21 @@
   place-items: center;
 }
 
+.nav-badge {
+  position: absolute;
+  top: 15px;
+  right: -14px;
+  display: grid;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  color: #ffffff;
+  font-size: 0.68rem;
+  background: #a94048;
+  border-radius: 999px;
+  place-items: center;
+}
+
 .primary-nav a.active {
   color: #236879;
 }
@@ -115,5 +130,11 @@ a:focus-visible {
   .primary-nav a {
     flex: 1;
     min-width: 0;
+  }
+
+
+  .nav-badge {
+    top: 7px;
+    right: calc(50% - 42px);
   }
 }

@@ -8,6 +8,8 @@ import { ClaimsComponent } from './claims/claims.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { ClaimDetailComponent } from './claims/claim-detail.component';
+import { MessageDetailComponent } from './messages/message-detail.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ClaimDetailComponent } from './claims/claim-detail.component';
     DashboardComponent,
     ClaimsComponent,
     ClaimDetailComponent,
-    BenefitsComponent
+    BenefitsComponent,
+    MessagesComponent,
+    MessageDetailComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],

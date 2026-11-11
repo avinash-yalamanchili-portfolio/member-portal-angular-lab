@@ -1,0 +1,123 @@
+<main class="messages-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">Communication center</p>
+      <h1>Secure messages</h1>
+      <p>Review account updates and send a message to the support team.</p>
+    </div>
+    <button class="primary-button" type="button" (click)="toggleComposer()">
+      {{ showComposer ? 'Cancel message' : 'New message' }}
+    </button>
+  </header>
+
+  <section *ngIf="showComposer" class="composer" aria-labelledby="composer-title">
+    <div>
+      <p class="section-label">Secure communication</p>
+      <h2 id="composer-title">New message</h2>
+    </div>
+
+    <form (ngSubmit)="sendMessage()">
+      <label>
+        Topic
+        <select name="category" [(ngModel)]="composeCategory">
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </label>
+      <label>
+        Subject
+        <input
+          name="subject"
+          type="text"
+          [(ngModel)]="composeSubject"
+          maxlength="80"
+          required
+        />
+      </label>
+      <label class="full-width">
+        Message
+        <textarea
+          name="body"
+          [(ngModel)]="composeBody"
+          rows="5"
+          maxlength="1000"
+          required
+        ></textarea>
+      </label>
+      <div class="form-actions full-width">
+        <span>{{ composeBody.length }} / 1000</span>
+        <button
+          type="submit"
+          [disabled]="!composeSubject.trim() || !composeBody.trim()"
+        >
+          Send message
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <p *ngIf="confirmationMessage" class="confirmation" role="status">
+    {{ confirmationMessage }}
+  </p>
+
+  <section class="messages-panel" aria-labelledby="message-list-title">
+    <div class="panel-heading">
+      <div>
+        <p class="section-label">Message center</p>
+        <h2 id="message-list-title">Messages</h2>
+      </div>
+      <span class="unread-summary">{{ unreadCount }} unread</span>
+    </div>
+
+    <div class="messages-toolbar">
+      <div class="filter-group" aria-label="Filter messages">
+        <button
+          *ngFor="let filter of filters"
+          type="button"
+          [class.active]="selectedFilter === filter"
+          [attr.aria-pressed]="selectedFilter === filter"
+          (click)="selectFilter(filter)"
+        >
+          {{ filter }}
+        </button>
+      </div>
+
+      <label>
+        <span class="visually-hidden">Search messages</span>
+        <input
+          type="search"
+          [(ngModel)]="searchTerm"
+          placeholder="Search messages"
+        />
+      </label>
+    </div>
+
+    <ul class="message-list">
+      <li
+        *ngFor="let message of filteredMessages"
+        [class.unread]="message.folder === 'Inbox' && !message.isRead"
+      >
+        <a [routerLink]="['/messages', message.id]">
+          <span class="message-dot" aria-hidden="true"></span>
+          <span class="message-content">
+            <span class="message-meta">
+              <strong>{{ message.subject }}</strong>
+              <time>{{ message.receivedDate }}</time>
+            </span>
+            <span class="sender">{{ message.sender }} · {{ message.category }}</span>
+            <span class="preview">{{ message.preview }}</span>
+          </span>
+          <span *ngIf="message.priority === 'Important'" class="priority">
+            Important
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <div *ngIf="filteredMessages.length === 0" class="empty-state">
+      <h3>No messages found</h3>
+      <p>Try a different filter or search phrase.</p>
+    </div>
+  </section>
+</main>

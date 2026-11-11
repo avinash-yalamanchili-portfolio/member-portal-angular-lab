@@ -1,0 +1,26 @@
+.message-detail-page { width: min(820px, calc(100% - 48px)); margin: 0 auto; padding: 40px 0 72px; }
+.back-link { display: inline-block; margin-bottom: 28px; color: #236879; font-weight: 800; text-decoration: none; }
+.message-card { overflow: hidden; background: #ffffff; border: 1px solid #d9e2e6; border-radius: 14px; box-shadow: 0 10px 30px rgba(31, 55, 68, 0.06); }
+.message-card header { display: flex; gap: 24px; align-items: flex-start; justify-content: space-between; padding: 28px; border-bottom: 1px solid #e4eaed; }
+.message-labels { display: flex; gap: 8px; align-items: center; }
+.message-labels span,
+.folder { padding: 5px 8px; color: #236879; font-size: 0.72rem; font-weight: 800; background: #e5f1f3; border-radius: 999px; }
+.message-labels .important { color: #805817; background: #fff3d8; }
+h1 { margin: 12px 0 8px; font-size: clamp(1.7rem, 4vw, 2.4rem); }
+p { margin: 0; color: #52656e; line-height: 1.7; }
+.message-body { min-height: 180px; padding: 34px 28px; }
+.message-body p { color: #304d58; font-size: 1.02rem; }
+.message-card footer { display: flex; gap: 20px; align-items: center; justify-content: space-between; padding: 20px 28px; background: #f4f7f8; border-top: 1px solid #e4eaed; }
+.message-card footer p { font-size: 0.78rem; }
+.message-card footer a { flex: 0 0 auto; color: #236879; font-weight: 800; text-decoration: none; }
+.eyebrow { margin: 0; color: #236879; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.not-found { padding: 48px; text-align: center; background: #ffffff; border: 1px solid #d9e2e6; border-radius: 14px; }
+.not-found a { display: inline-block; margin-top: 20px; padding: 10px 14px; color: #ffffff; font-weight: 800; text-decoration: none; background: #236879; border-radius: 8px; }
+a:focus-visible { outline: 3px solid #e1a95f; outline-offset: 3px; }
+
+@media (max-width: 600px) {
+  .message-detail-page { width: min(100% - 32px, 820px); padding-bottom: 96px; }
+  .message-card header,
+  .message-card footer { align-items: flex-start; flex-direction: column; padding: 22px 18px; }
+  .message-body { padding: 28px 18px; }
+}

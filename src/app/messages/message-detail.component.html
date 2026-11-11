@@ -1,0 +1,37 @@
+<main class="message-detail-page">
+  <a class="back-link" routerLink="/messages">Back to messages</a>
+
+  <article *ngIf="message; else messageNotFound" class="message-card">
+    <header>
+      <div>
+        <div class="message-labels">
+          <span>{{ message.category }}</span>
+          <span *ngIf="message.priority === 'Important'" class="important">
+            Important
+          </span>
+        </div>
+        <h1>{{ message.subject }}</h1>
+        <p>{{ message.sender }} · {{ message.receivedDate }}</p>
+      </div>
+      <span class="folder">{{ message.folder }}</span>
+    </header>
+
+    <div class="message-body">
+      <p>{{ message.body }}</p>
+    </div>
+
+    <footer>
+      <p>This workspace uses synthetic demo messages and does not transmit data.</p>
+      <a routerLink="/messages">Return to message center</a>
+    </footer>
+  </article>
+
+  <ng-template #messageNotFound>
+    <section class="not-found">
+      <p class="eyebrow">Message unavailable</p>
+      <h1>We could not find this message</h1>
+      <p>The message identifier may be invalid or no longer available.</p>
+      <a routerLink="/messages">Return to messages</a>
+    </section>
+  </ng-template>
+</main>

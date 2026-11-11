@@ -24,4 +24,23 @@ describe('PortalDataService', () => {
   it('should return undefined for an unknown claim', () => {
     expect(service.getClaimById('UNKNOWN')).toBeUndefined();
   });
+
+  it('should track unread messages', () => {
+    expect(service.getUnreadMessageCount()).toBe(2);
+
+    service.markMessageRead('DEMO-MSG-001');
+
+    expect(service.getUnreadMessageCount()).toBe(1);
+  });
+
+  it('should add a synthetic sent message', () => {
+    const sent = service.sendMessage(
+      'Demo subject',
+      'Synthetic message body',
+      'Account'
+    );
+
+    expect(sent.folder).toBe('Sent');
+    expect(service.getMessages()[0].id).toBe(sent.id);
+  });
 });

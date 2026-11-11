@@ -4,7 +4,9 @@ import {
   Claim,
   DashboardSummary,
   MemberActivity,
-  MemberProfile
+  MemberProfile,
+  MessageCategory,
+  SecureMessage
 } from './portal.models';
 
 @Injectable({ providedIn: 'root' })
@@ -107,6 +109,45 @@ export class PortalDataService {
     }
   ];
 
+  private readonly messages: SecureMessage[] = [
+    {
+      id: 'DEMO-MSG-001',
+      subject: 'Claim review completed',
+      preview: 'A recent demo claim has finished processing.',
+      body: 'The review of demo claim DEMO-CLM-001 is complete. Open the Claims workspace to review the processing summary and cost breakdown.',
+      sender: 'Example Member Services',
+      receivedDate: 'Nov 10, 2026',
+      category: 'Claims',
+      folder: 'Inbox',
+      isRead: false,
+      priority: 'Important'
+    },
+    {
+      id: 'DEMO-MSG-002',
+      subject: 'Plan document available',
+      preview: 'Your example plan summary is ready to view.',
+      body: 'An updated example plan summary is available. Visit the Benefits workspace to review coverage categories and annual cost progress.',
+      sender: 'Example Plan Support',
+      receivedDate: 'Nov 8, 2026',
+      category: 'Benefits',
+      folder: 'Inbox',
+      isRead: false,
+      priority: 'Normal'
+    },
+    {
+      id: 'DEMO-MSG-003',
+      subject: 'Account preferences saved',
+      preview: 'Your demo communication preferences were updated.',
+      body: 'The communication preferences for this demo account were saved successfully. No further action is required.',
+      sender: 'Example Account Services',
+      receivedDate: 'Nov 5, 2026',
+      category: 'Account',
+      folder: 'Inbox',
+      isRead: true,
+      priority: 'Normal'
+    }
+  ];
+
   getMember(): MemberProfile {
     return { ...this.member };
   }
@@ -127,10 +168,54 @@ export class PortalDataService {
     }));
   }
 
+  getMessages(): SecureMessage[] {
+    return this.messages.map((message) => ({ ...message }));
+  }
+
+  getMessageById(id: string): SecureMessage | undefined {
+    const message = this.messages.find((item) => item.id === id);
+    return message ? { ...message } : undefined;
+  }
+
+  getUnreadMessageCount(): number {
+    return this.messages.filter(
+      (message) => message.folder === 'Inbox' && !message.isRead
+    ).length;
+  }
+
+  markMessageRead(id: string): void {
+    const message = this.messages.find((item) => item.id === id);
+    if (message && message.folder === 'Inbox') {
+      message.isRead = true;
+    }
+  }
+
+  sendMessage(
+    subject: string,
+    body: string,
+    category: MessageCategory
+  ): SecureMessage {
+    const message: SecureMessage = {
+      id: `DEMO-MSG-${String(this.messages.length + 1).padStart(3, '0')}`,
+      subject,
+      preview: body.slice(0, 90),
+      body,
+      sender: 'You',
+      receivedDate: 'Just now',
+      category,
+      folder: 'Sent',
+      isRead: true,
+      priority: 'Normal'
+    };
+
+    this.messages.unshift(message);
+    return { ...message };
+  }
+
   getDashboardSummaries(): DashboardSummary[] {
     return [
       { label: 'Claims', value: String(this.claims.length), description: 'View claim history', route: '/claims' },
-      { label: 'Messages', value: '2', description: 'Unread messages', route: '/overview' },
+      { label: 'Messages', value: String(this.getUnreadMessageCount()), description: 'Unread messages', route: '/messages' },
       { label: 'Benefits', value: String(this.benefits.length), description: 'Coverage categories', route: '/benefits' }
     ];
   }

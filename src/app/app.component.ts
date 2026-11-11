@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PortalDataService } from './shared/portal-data.service';
 
 @Component({
   standalone: false,
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Member Portal';
-  memberInitial = 'J';
+  memberInitial = 'M';
+
+  constructor(private readonly portalData: PortalDataService) {}
+
+  get unreadMessageCount(): number {
+    return this.portalData.getUnreadMessageCount();
+  }
 }
