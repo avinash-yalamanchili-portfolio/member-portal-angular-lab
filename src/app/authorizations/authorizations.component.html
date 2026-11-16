@@ -1,0 +1,60 @@
+<main class="authorizations-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">Care approvals</p>
+      <h1>Prior authorizations</h1>
+      <p>Track requests submitted by your care team and see when action is needed.</p>
+    </div>
+    <a class="back-link" routerLink="/overview">Back to overview</a>
+  </header>
+
+  <section class="summary-grid" aria-label="Authorization summary">
+    <article><span>Total requests</span><strong>{{ authorizations.length }}</strong></article>
+    <article><span>In review</span><strong>{{ inReviewCount }}</strong></article>
+    <article [class.needs-attention]="attentionCount > 0"><span>Needs attention</span><strong>{{ attentionCount }}</strong></article>
+  </section>
+
+  <section class="authorization-panel" aria-labelledby="authorization-list-title">
+    <div class="panel-heading">
+      <div><p class="section-label">Request history</p><h2 id="authorization-list-title">Authorization requests</h2></div>
+      <div class="filter-group" aria-label="Filter authorizations by status">
+        <button *ngFor="let filter of filters" type="button" [class.active]="selectedFilter === filter" [attr.aria-pressed]="selectedFilter === filter" (click)="selectFilter(filter)">{{ filter }}</button>
+      </div>
+    </div>
+
+    <div class="search-row">
+      <label for="authorization-search">Search requests</label>
+      <input id="authorization-search" type="search" [(ngModel)]="searchTerm" placeholder="Request number, service, provider, or member" />
+      <span>{{ filteredAuthorizations.length }} result{{ filteredAuthorizations.length === 1 ? '' : 's' }}</span>
+    </div>
+
+    <div class="request-list">
+      <article *ngFor="let authorization of filteredAuthorizations" class="request-card">
+        <div class="request-main">
+          <div class="request-title">
+            <span class="request-id">{{ authorization.id }}</span>
+            <app-status-badge [label]="authorization.status" [tone]="statusTone(authorization.status)"></app-status-badge>
+          </div>
+          <h3>{{ authorization.service }}</h3>
+          <p>{{ authorization.requestingProvider }} · {{ authorization.memberName }}</p>
+        </div>
+        <dl>
+          <div><dt>Requested</dt><dd>{{ authorization.requestedDate }}</dd></div>
+          <div><dt>Priority</dt><dd>{{ authorization.priority }}</dd></div>
+          <div><dt>Last updated</dt><dd>{{ authorization.lastUpdatedDate }}</dd></div>
+        </dl>
+        <a [routerLink]="['/authorizations', authorization.id]" [attr.aria-label]="'View ' + authorization.id">View details <span aria-hidden="true">→</span></a>
+      </article>
+
+      <div *ngIf="filteredAuthorizations.length === 0" class="empty-state">
+        <h3>No matching requests</h3><p>Try a different status or search term.</p>
+        <button type="button" (click)="clearFilters()">Clear filters</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="information-note">
+    <strong>About prior authorization</strong>
+    <p>Some covered services require plan review before they are provided. An authorization is not a guarantee of payment; eligibility and benefits apply on the service date.</p>
+  </aside>
+</main>

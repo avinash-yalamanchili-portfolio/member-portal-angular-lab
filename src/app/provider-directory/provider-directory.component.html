@@ -1,0 +1,58 @@
+<main class="directory-page">
+  <header class="page-heading">
+    <div><p class="eyebrow">Provider directory</p><h1>Find care</h1><p>Search provider options by specialty, network, availability, and language.</p></div>
+    <a class="back-link" routerLink="/overview">Back to overview</a>
+  </header>
+
+  <section class="directory-layout">
+    <aside class="filter-panel" aria-labelledby="filter-title">
+      <div><p class="section-label">Refine results</p><h2 id="filter-title">Filters</h2></div>
+      <label class="field-label" for="specialty">Specialty</label>
+      <select id="specialty" [(ngModel)]="selectedSpecialty"><option *ngFor="let specialty of specialties">{{ specialty }}</option></select>
+
+      <fieldset>
+        <legend>Preferences</legend>
+        <label><input type="checkbox" [(ngModel)]="inNetworkOnly" /> In-network providers</label>
+        <label><input type="checkbox" [(ngModel)]="acceptingOnly" /> Accepting new patients</label>
+        <label><input type="checkbox" [(ngModel)]="telehealthOnly" /> Telehealth available</label>
+        <label><input type="checkbox" [(ngModel)]="favoritesOnly" /> Saved providers only</label>
+      </fieldset>
+      <button type="button" class="clear-button" (click)="clearFilters()">Reset filters</button>
+    </aside>
+
+    <section class="results-panel" aria-labelledby="results-title">
+      <div class="results-heading">
+        <div><p class="section-label">Directory results</p><h2 id="results-title">Providers near you</h2></div>
+        <span>{{ filteredProviders.length }} result{{ filteredProviders.length === 1 ? '' : 's' }}</span>
+      </div>
+      <label class="search-label" for="provider-search">Search by name, specialty, city, or language</label>
+      <input id="provider-search" class="search-input" type="search" [(ngModel)]="searchTerm" placeholder="Search providers" />
+
+      <div class="provider-list">
+        <article *ngFor="let provider of filteredProviders" class="provider-card">
+          <div class="provider-initial" aria-hidden="true">{{ provider.name.charAt(0) }}</div>
+          <div class="provider-summary">
+            <div class="provider-title">
+              <div><h3>{{ provider.name }}</h3><p>{{ provider.specialty }}</p></div>
+              <button type="button" class="favorite-button" [class.saved]="isFavorite(provider.id)" [attr.aria-label]="(isFavorite(provider.id) ? 'Remove ' : 'Save ') + provider.name" [attr.aria-pressed]="isFavorite(provider.id)" (click)="toggleFavorite(provider.id)">{{ isFavorite(provider.id) ? '★ Saved' : '☆ Save' }}</button>
+            </div>
+            <div class="badges">
+              <app-status-badge [label]="provider.networkStatus" [tone]="provider.networkStatus === 'In network' ? 'success' : 'warning'"></app-status-badge>
+              <app-status-badge *ngIf="provider.acceptingNewPatients" label="Accepting patients" tone="info"></app-status-badge>
+              <app-status-badge *ngIf="provider.telehealthAvailable" label="Telehealth" tone="neutral"></app-status-badge>
+            </div>
+            <dl>
+              <div><dt>Location</dt><dd>{{ provider.location.cityStateZip }} · {{ provider.location.distanceMiles }} miles</dd></div>
+              <div><dt>Languages</dt><dd>{{ provider.languages.join(', ') }}</dd></div>
+            </dl>
+            <a [routerLink]="['/find-care', provider.id]">View provider details <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <div *ngIf="filteredProviders.length === 0" class="empty-state"><h3>No providers match these filters</h3><p>Broaden your search or reset the filters.</p><button type="button" (click)="clearFilters()">Reset filters</button></div>
+      </div>
+    </section>
+  </section>
+
+  <aside class="directory-notice"><strong>Confirm before receiving care.</strong><p>Provider participation, availability, and office information can change. Contact the provider and your health plan before scheduling services.</p></aside>
+</main>

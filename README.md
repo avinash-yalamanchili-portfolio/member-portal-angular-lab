@@ -13,6 +13,11 @@ information.
 - household coverage workspace with member selection
 - front/back digital ID card with copy and print actions
 - persisted coverage preferences using safe browser storage
+- prior-authorization workspace with status filters and attention states
+- authorization detail timelines, decision targets, and next-step guidance
+- provider directory with network, specialty, availability, telehealth, and language filters
+- provider profiles with office, accessibility, and network information
+- saved providers persisted locally across sessions
 - claims, messages, and benefits overview
 - claims workspace with status filters and financial summaries
 - claim search and individual claim cost details
@@ -30,7 +35,9 @@ information.
 - Angular 20 with TypeScript
 - traditional `NgModule` application structure
 - SCSS component styling
-- Angular Router with dashboard, coverage, claims, benefits, and secure-message routes
+- Angular Router with dashboard, coverage, claims, authorizations, provider directory, benefits, and secure-message routes
+- feature modules for prior authorizations and the provider directory
+- reusable status badges with semantic visual states
 - centralized typed feature models and data access service
 - Jasmine and Karma component tests
 

@@ -52,4 +52,17 @@ describe('PortalDataService', () => {
     expect(sent.folder).toBe('Sent');
     expect(service.getMessages()[0].id).toBe(sent.id);
   });
+
+  it('should return authorization details with independent timelines', () => {
+    const authorization = service.getAuthorizationById('DEMO-AUTH-001');
+    expect(authorization?.status).toBe('Approved');
+    authorization?.timeline.pop();
+    expect(service.getAuthorizationById('DEMO-AUTH-001')?.timeline.length).toBe(3);
+  });
+
+  it('should return provider details with independent nested data', () => {
+    const provider = service.getProviderById('DEMO-PROVIDER-001');
+    provider?.languages.pop();
+    expect(service.getProviderById('DEMO-PROVIDER-001')?.languages.length).toBe(2);
+  });
 });

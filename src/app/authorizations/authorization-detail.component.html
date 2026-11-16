@@ -1,0 +1,50 @@
+<main class="detail-page">
+  <a class="back-link" routerLink="/authorizations">← All authorizations</a>
+
+  <ng-container *ngIf="authorization; else notFound">
+    <header class="detail-heading">
+      <div>
+        <p class="eyebrow">{{ authorization.id }}</p>
+        <h1>{{ authorization.service }}</h1>
+        <p>Requested for {{ authorization.memberName }} by {{ authorization.requestingProvider }}</p>
+      </div>
+      <app-status-badge [label]="authorization.status" [tone]="statusTone(authorization.status)"></app-status-badge>
+    </header>
+
+    <section class="next-step" [class.attention]="authorization.status === 'Information needed'">
+      <div class="next-icon" aria-hidden="true">{{ authorization.status === 'Information needed' ? '!' : '✓' }}</div>
+      <div><p class="section-label">What happens next</p><h2>{{ authorization.nextStep }}</h2></div>
+    </section>
+
+    <div class="detail-layout">
+      <section class="timeline-panel" aria-labelledby="timeline-title">
+        <p class="section-label">Request progress</p>
+        <h2 id="timeline-title">Status timeline</h2>
+        <ol class="timeline">
+          <li *ngFor="let event of authorization.timeline" [class.complete]="event.complete">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <div><strong>{{ event.label }}</strong><time>{{ event.date }}</time><p>{{ event.description }}</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="request-panel" aria-labelledby="request-details-title">
+        <p class="section-label">Request information</p>
+        <h2 id="request-details-title">Details</h2>
+        <dl>
+          <div><dt>Reference number</dt><dd>{{ authorization.referenceNumber }}</dd></div>
+          <div><dt>Service category</dt><dd>{{ authorization.serviceCategory }}</dd></div>
+          <div><dt>Service location</dt><dd>{{ authorization.serviceLocation }}</dd></div>
+          <div><dt>Priority</dt><dd>{{ authorization.priority }}</dd></div>
+          <div><dt>Requested date</dt><dd>{{ authorization.requestedDate }}</dd></div>
+          <div><dt>Decision target</dt><dd>{{ authorization.decisionTargetDate }}</dd></div>
+        </dl>
+        <a routerLink="/messages">Contact member services</a>
+      </aside>
+    </div>
+  </ng-container>
+
+  <ng-template #notFound>
+    <section class="not-found"><p class="eyebrow">Request unavailable</p><h1>Authorization not found</h1><p>This request number is not available.</p><a routerLink="/authorizations">Return to authorizations</a></section>
+  </ng-template>
+</main>

@@ -11,6 +11,8 @@ import { ClaimDetailComponent } from './claims/claim-detail.component';
 import { MessageDetailComponent } from './messages/message-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CoverageComponent } from './coverage/coverage.component';
+import { AuthorizationsModule } from './authorizations/authorizations.module';
+import { ProviderDirectoryModule } from './provider-directory/provider-directory.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import { CoverageComponent } from './coverage/coverage.component';
     MessageDetailComponent,
     CoverageComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AuthorizationsModule,
+    ProviderDirectoryModule,
+    AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

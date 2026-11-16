@@ -1,0 +1,38 @@
+<main class="provider-page">
+  <a class="back-link" routerLink="/find-care">← Back to provider results</a>
+
+  <ng-container *ngIf="provider; else notFound">
+    <header class="provider-heading">
+      <div class="provider-identity"><span aria-hidden="true">{{ provider.name.charAt(0) }}</span><div><p class="eyebrow">{{ provider.specialty }}</p><h1>{{ provider.name }}</h1><p>{{ provider.location.distanceMiles }} miles from your search location</p></div></div>
+      <button type="button" [class.saved]="isFavorite" [attr.aria-pressed]="isFavorite" (click)="toggleFavorite()">{{ isFavorite ? '★ Saved provider' : '☆ Save provider' }}</button>
+    </header>
+
+    <section class="network-banner" [class.out-network]="provider.networkStatus === 'Out of network'">
+      <app-status-badge [label]="provider.networkStatus" [tone]="provider.networkStatus === 'In network' ? 'success' : 'warning'"></app-status-badge>
+      <p>{{ provider.networkStatus === 'In network' ? 'This provider appears in the example in-network directory.' : 'Out-of-network care may have higher costs or may not be covered.' }}</p>
+    </section>
+
+    <div class="provider-layout">
+      <section class="office-panel" aria-labelledby="office-title">
+        <p class="section-label">Office information</p><h2 id="office-title">Location and contact</h2>
+        <dl>
+          <div><dt>Address</dt><dd>{{ provider.location.addressLine }}<br />{{ provider.location.cityStateZip }}</dd></div>
+          <div><dt>Phone</dt><dd><a [href]="'tel:' + provider.location.phone">{{ provider.location.phone }}</a></dd></div>
+          <div><dt>Office hours</dt><dd>{{ provider.officeHours }}</dd></div>
+          <div><dt>New patients</dt><dd>{{ provider.acceptingNewPatients ? 'Accepting new patients' : 'Not currently accepting new patients' }}</dd></div>
+          <div><dt>Telehealth</dt><dd>{{ provider.telehealthAvailable ? 'Available' : 'Not listed' }}</dd></div>
+        </dl>
+      </section>
+
+      <section class="details-panel" aria-labelledby="details-title">
+        <p class="section-label">Practice details</p><h2 id="details-title">Languages and accessibility</h2>
+        <h3>Languages</h3><ul><li *ngFor="let language of provider.languages">{{ language }}</li></ul>
+        <h3>Accessibility</h3><ul><li *ngFor="let item of provider.accessibility">{{ item }}</li></ul>
+      </section>
+    </div>
+
+    <aside class="verification-note"><strong>Verify directory information</strong><p>Call the office to confirm network participation, appointment availability, accessibility accommodations, and referral requirements before receiving care.</p></aside>
+  </ng-container>
+
+  <ng-template #notFound><section class="not-found"><p class="eyebrow">Provider unavailable</p><h1>Provider not found</h1><a routerLink="/find-care">Return to provider directory</a></section></ng-template>
+</main>

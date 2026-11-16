@@ -80,3 +80,58 @@ export interface SecureMessage {
   isRead: boolean;
   priority: 'Normal' | 'Important';
 }
+
+export type AuthorizationStatus =
+  | 'Submitted'
+  | 'In review'
+  | 'Information needed'
+  | 'Approved'
+  | 'Denied';
+
+export type AuthorizationFilter = 'All' | AuthorizationStatus;
+
+export interface AuthorizationTimelineEvent {
+  label: string;
+  date: string;
+  description: string;
+  complete: boolean;
+}
+
+export interface PriorAuthorization {
+  id: string;
+  memberName: string;
+  service: string;
+  serviceCategory: string;
+  requestingProvider: string;
+  serviceLocation: string;
+  requestedDate: string;
+  lastUpdatedDate: string;
+  decisionTargetDate: string;
+  status: AuthorizationStatus;
+  priority: 'Standard' | 'Expedited';
+  referenceNumber: string;
+  nextStep: string;
+  timeline: AuthorizationTimelineEvent[];
+}
+
+export type NetworkStatus = 'In network' | 'Out of network';
+
+export interface ProviderLocation {
+  addressLine: string;
+  cityStateZip: string;
+  phone: string;
+  distanceMiles: number;
+}
+
+export interface DirectoryProvider {
+  id: string;
+  name: string;
+  specialty: string;
+  networkStatus: NetworkStatus;
+  acceptingNewPatients: boolean;
+  telehealthAvailable: boolean;
+  languages: string[];
+  location: ProviderLocation;
+  officeHours: string;
+  accessibility: string[];
+}
