@@ -3,7 +3,7 @@
     <div>
       <p class="eyebrow">Account overview</p>
       <h1>Welcome back, {{ member.firstName }}</h1>
-      <p>Review your coverage, claims, benefits, and account activity.</p>
+      <p>Review coverage, care activity, prescriptions, and account updates.</p>
     </div>
     <span class="coverage-badge">{{ member.coverageStatus }} coverage</span>
   </section>
@@ -50,7 +50,7 @@
         <p class="section-label">Account updates</p>
         <h2 id="activity-title">Recent activity</h2>
       </div>
-      <a class="text-link" routerLink="/claims">View claims</a>
+      <a class="text-link" routerLink="/appointments">View appointments</a>
     </div>
 
     <ul class="activity-list">

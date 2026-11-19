@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {
   BenefitCategory,
+  CareAppointment,
   Claim,
   CoveredMember,
   DirectoryProvider,
   DashboardSummary,
   MemberActivity,
   MemberProfile,
+  Medication,
   MessageCategory,
   PriorAuthorization,
   SecureMessage
@@ -328,6 +330,60 @@ export class PortalDataService {
     }
   ];
 
+  private readonly appointments: CareAppointment[] = [
+    {
+      id: 'DEMO-APT-001', memberName: 'Demo Member', providerName: 'Example Primary Care',
+      specialty: 'Primary care', appointmentType: 'Office visit', date: 'Nov 24, 2026', time: '9:30 AM',
+      status: 'Upcoming', location: '100 Example Avenue, Demo City, CA 90001', phone: '(555) 010-1001',
+      reason: 'Annual wellness visit', confirmationCode: 'DEMO-CONF-2401', checkInOpens: 'Nov 22, 2026',
+      checklist: [
+        { id: 'insurance-card', label: 'Verify insurance card', description: 'Review the digital ID card before the visit.', required: true },
+        { id: 'medications', label: 'Review medication list', description: 'Confirm current prescriptions and supplements.', required: true },
+        { id: 'questions', label: 'Prepare questions', description: 'Add topics you want to discuss with the provider.', required: false }
+      ]
+    },
+    {
+      id: 'DEMO-APT-002', memberName: 'Demo Dependent', providerName: 'Example Family Practice',
+      specialty: 'Family medicine', appointmentType: 'Video visit', date: 'Dec 3, 2026', time: '2:00 PM',
+      status: 'Upcoming', location: 'Secure video visit', phone: '(555) 010-1002', reason: 'Follow-up visit',
+      confirmationCode: 'DEMO-CONF-2402', checkInOpens: 'Dec 3, 2026 at 1:45 PM',
+      checklist: [
+        { id: 'device', label: 'Test camera and microphone', description: 'Use a supported browser and allow device access.', required: true },
+        { id: 'medications', label: 'Review medication list', description: 'Confirm current prescriptions.', required: true }
+      ]
+    },
+    {
+      id: 'DEMO-APT-003', memberName: 'Demo Member', providerName: 'Example Diagnostic Center',
+      specialty: 'Laboratory services', appointmentType: 'Lab visit', date: 'Oct 18, 2026', time: '8:15 AM',
+      status: 'Completed', location: '250 Sample Plaza, Demo City, CA 90002', phone: '(555) 010-1010',
+      reason: 'Routine laboratory testing', confirmationCode: 'DEMO-CONF-2390', checkInOpens: 'Completed', checklist: []
+    }
+  ];
+
+  private readonly medications: Medication[] = [
+    {
+      id: 'DEMO-RX-001', memberName: 'Demo Member', name: 'Example Medication A', strength: '10 mg',
+      directions: 'Take one tablet by mouth once daily.', prescriber: 'Example Primary Care',
+      pharmacy: 'Example Community Pharmacy', status: 'Active', refillsRemaining: 2,
+      lastFilledDate: 'Oct 30, 2026', nextRefillDate: 'Nov 29, 2026', supplyDays: 30,
+      warnings: ['Take at the same time each day.', 'Contact the prescriber before stopping this medication.']
+    },
+    {
+      id: 'DEMO-RX-002', memberName: 'Demo Member', name: 'Example Medication B', strength: '25 mg',
+      directions: 'Take one tablet with food in the evening.', prescriber: 'Example Specialty Clinic',
+      pharmacy: 'Example Mail Pharmacy', status: 'Renewal needed', refillsRemaining: 0,
+      lastFilledDate: 'Oct 16, 2026', nextRefillDate: 'Nov 20, 2026', supplyDays: 30,
+      warnings: ['Take with food.', 'A new prescription is required for the next fill.']
+    },
+    {
+      id: 'DEMO-RX-003', memberName: 'Demo Dependent', name: 'Example Medication C', strength: '5 mg',
+      directions: 'Take one tablet as directed.', prescriber: 'Example Family Practice',
+      pharmacy: 'Example Community Pharmacy', status: 'Active', refillsRemaining: 4,
+      lastFilledDate: 'Nov 8, 2026', nextRefillDate: 'Dec 8, 2026', supplyDays: 30,
+      warnings: ['Keep out of reach of children.']
+    }
+  ];
+
   getMember(): MemberProfile {
     return { ...this.member };
   }
@@ -386,6 +442,27 @@ export class PortalDataService {
       : undefined;
   }
 
+  getAppointments(): CareAppointment[] {
+    return this.appointments.map((appointment) => ({
+      ...appointment,
+      checklist: appointment.checklist.map((item) => ({ ...item }))
+    }));
+  }
+
+  getAppointmentById(id: string): CareAppointment | undefined {
+    const appointment = this.appointments.find((item) => item.id === id);
+    return appointment ? { ...appointment, checklist: appointment.checklist.map((item) => ({ ...item })) } : undefined;
+  }
+
+  getMedications(): Medication[] {
+    return this.medications.map((medication) => ({ ...medication, warnings: [...medication.warnings] }));
+  }
+
+  getMedicationById(id: string): Medication | undefined {
+    const medication = this.medications.find((item) => item.id === id);
+    return medication ? { ...medication, warnings: [...medication.warnings] } : undefined;
+  }
+
   getMessageById(id: string): SecureMessage | undefined {
     const message = this.messages.find((item) => item.id === id);
     return message ? { ...message } : undefined;
@@ -432,6 +509,8 @@ export class PortalDataService {
       { label: 'Claims', value: String(this.claims.length), description: 'View claim history', route: '/claims' },
       { label: 'Authorizations', value: String(this.authorizations.length), description: 'Track care requests', route: '/authorizations' },
       { label: 'Find care', value: String(this.providers.filter((provider) => provider.networkStatus === 'In network').length), description: 'In-network options', route: '/find-care' },
+      { label: 'Appointments', value: String(this.appointments.filter((appointment) => appointment.status === 'Upcoming').length), description: 'Upcoming visits', route: '/appointments' },
+      { label: 'Medications', value: String(this.medications.filter((medication) => medication.status !== 'Inactive').length), description: 'Active prescriptions', route: '/medications' },
       { label: 'Messages', value: String(this.getUnreadMessageCount()), description: 'Unread messages', route: '/messages' },
       { label: 'Benefits', value: String(this.benefits.length), description: 'Coverage categories', route: '/benefits' }
     ];

@@ -135,3 +135,48 @@ export interface DirectoryProvider {
   officeHours: string;
   accessibility: string[];
 }
+
+export type AppointmentStatus = 'Upcoming' | 'Completed' | 'Cancelled';
+export type AppointmentType = 'Office visit' | 'Video visit' | 'Lab visit';
+
+export interface AppointmentChecklistItem {
+  id: string;
+  label: string;
+  description: string;
+  required: boolean;
+}
+
+export interface CareAppointment {
+  id: string;
+  memberName: string;
+  providerName: string;
+  specialty: string;
+  appointmentType: AppointmentType;
+  date: string;
+  time: string;
+  status: AppointmentStatus;
+  location: string;
+  phone: string;
+  reason: string;
+  confirmationCode: string;
+  checkInOpens: string;
+  checklist: AppointmentChecklistItem[];
+}
+
+export type MedicationStatus = 'Active' | 'Renewal needed' | 'Inactive';
+
+export interface Medication {
+  id: string;
+  memberName: string;
+  name: string;
+  strength: string;
+  directions: string;
+  prescriber: string;
+  pharmacy: string;
+  status: MedicationStatus;
+  refillsRemaining: number;
+  lastFilledDate: string;
+  nextRefillDate: string;
+  supplyDays: number;
+  warnings: string[];
+}

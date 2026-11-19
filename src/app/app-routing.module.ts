@@ -11,6 +11,10 @@ import { AuthorizationDetailComponent } from './authorizations/authorization-det
 import { AuthorizationsComponent } from './authorizations/authorizations.component';
 import { ProviderDetailComponent } from './provider-directory/provider-detail.component';
 import { ProviderDirectoryComponent } from './provider-directory/provider-directory.component';
+import { AppointmentDetailComponent } from './appointments/appointment-detail.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { MedicationDetailComponent } from './medications/medication-detail.component';
+import { MedicationsComponent } from './medications/medications.component';
 
 const routes: Routes = [
   { path: 'overview', component: DashboardComponent, title: 'Overview | Member Portal' },
@@ -22,6 +26,10 @@ const routes: Routes = [
   { path: 'authorizations/:id', component: AuthorizationDetailComponent, title: 'Authorization Details | Member Portal' },
   { path: 'find-care', component: ProviderDirectoryComponent, title: 'Find Care | Member Portal' },
   { path: 'find-care/:id', component: ProviderDetailComponent, title: 'Provider Details | Member Portal' },
+  { path: 'appointments', component: AppointmentsComponent, title: 'Appointments | Member Portal' },
+  { path: 'appointments/:id', component: AppointmentDetailComponent, title: 'Appointment Details | Member Portal' },
+  { path: 'medications', component: MedicationsComponent, title: 'Medications | Member Portal' },
+  { path: 'medications/:id', component: MedicationDetailComponent, title: 'Medication Details | Member Portal' },
   { path: 'messages', component: MessagesComponent, title: 'Messages | Member Portal' },
   { path: 'messages/:id', component: MessageDetailComponent, title: 'Message Details | Member Portal' },
   { path: '', pathMatch: 'full', redirectTo: 'overview' },

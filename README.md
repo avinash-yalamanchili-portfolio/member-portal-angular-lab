@@ -18,6 +18,11 @@ information.
 - provider directory with network, specialty, availability, telehealth, and language filters
 - provider profiles with office, accessibility, and network information
 - saved providers persisted locally across sessions
+- appointment workspace with member, status, and keyword filters
+- appointment detail workflow with visit confirmation and persisted preparation checklist
+- support for office, video, and lab visit experiences
+- medication workspace with household, status, and keyword filters
+- refill timing, renewal warnings, browser-persisted reminders, and refill requests
 - claims, messages, and benefits overview
 - claims workspace with status filters and financial summaries
 - claim search and individual claim cost details
@@ -35,8 +40,8 @@ information.
 - Angular 20 with TypeScript
 - traditional `NgModule` application structure
 - SCSS component styling
-- Angular Router with dashboard, coverage, claims, authorizations, provider directory, benefits, and secure-message routes
-- feature modules for prior authorizations and the provider directory
+- Angular Router with dashboard, coverage, claims, authorizations, provider directory, appointments, medications, benefits, and secure-message routes
+- feature modules for prior authorizations, provider directory, appointments, and medications
 - reusable status badges with semantic visual states
 - centralized typed feature models and data access service
 - Jasmine and Karma component tests

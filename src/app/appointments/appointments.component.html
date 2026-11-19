@@ -1,0 +1,25 @@
+<main class="appointments-page">
+  <header class="page-heading">
+    <div><p class="eyebrow">Care journey</p><h1>Appointments</h1><p>Prepare for upcoming visits and review recent care.</p></div>
+    <button type="button" class="primary-button">Request an appointment</button>
+  </header>
+
+  <section class="toolbar" aria-label="Appointment filters">
+    <label>Search appointments<input type="search" [(ngModel)]="searchTerm" placeholder="Provider, specialty, or reason" /></label>
+    <div class="filter-group" role="group" aria-label="Filter by status">
+      <button *ngFor="let filter of filters" type="button" [class.active]="selectedFilter === filter" (click)="selectedFilter = filter">{{ filter }}</button>
+    </div>
+  </section>
+
+  <section class="appointment-list" aria-live="polite">
+    <a *ngFor="let appointment of filteredAppointments" class="appointment-card" [routerLink]="['/appointments', appointment.id]">
+      <div class="date-tile"><strong>{{ appointment.date.split(' ')[1].replace(',', '') }}</strong><span>{{ appointment.date.split(' ')[0] }}</span></div>
+      <div class="appointment-main">
+        <div class="card-top"><div><p>{{ appointment.appointmentType }} · {{ appointment.time }}</p><h2>{{ appointment.providerName }}</h2></div><span class="status" [class.complete]="appointment.status === 'Completed'">{{ appointment.status }}</span></div>
+        <p>{{ appointment.specialty }} · {{ appointment.reason }}</p>
+        <dl><div><dt>Member</dt><dd>{{ appointment.memberName }}</dd></div><div><dt>Location</dt><dd>{{ appointment.location }}</dd></div></dl>
+      </div>
+    </a>
+    <div *ngIf="filteredAppointments.length === 0" class="empty-state"><h2>No appointments found</h2><p>Try another status or search term.</p></div>
+  </section>
+</main>

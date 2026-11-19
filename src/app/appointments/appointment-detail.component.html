@@ -1,0 +1,15 @@
+<main *ngIf="appointment as visit; else missing" class="detail-page">
+  <a routerLink="/appointments" class="back-link">← Back to appointments</a>
+  <section class="hero-card">
+    <div><p class="eyebrow">{{ visit.appointmentType }}</p><h1>{{ visit.providerName }}</h1><p>{{ visit.reason }}</p></div>
+    <span class="status">{{ visit.status }}</span>
+  </section>
+  <div class="detail-grid">
+    <div class="main-column">
+      <section class="card"><h2>Visit details</h2><dl><div><dt>Date and time</dt><dd>{{ visit.date }} at {{ visit.time }}</dd></div><div><dt>Member</dt><dd>{{ visit.memberName }}</dd></div><div><dt>Location</dt><dd>{{ visit.location }}</dd></div><div><dt>Phone</dt><dd>{{ visit.phone }}</dd></div><div><dt>Confirmation</dt><dd>{{ visit.confirmationCode }}</dd></div></dl></section>
+      <section *ngIf="visit.checklist.length" class="card"><div class="section-heading"><div><p class="section-label">Before your visit</p><h2>Preparation checklist</h2></div><strong>{{ completionPercent }}%</strong></div><div class="progress"><span [style.width.%]="completionPercent"></span></div><label *ngFor="let item of visit.checklist" class="check-item"><input type="checkbox" [checked]="completedItems.includes(item.id)" (change)="toggleItem(item.id)" /><span><strong>{{ item.label }} <em *ngIf="item.required">Required</em></strong><small>{{ item.description }}</small></span></label></section>
+    </div>
+    <aside class="card action-card"><h2>Manage visit</h2><p *ngIf="!confirmed">Let the care team know you plan to attend.</p><p *ngIf="confirmed" class="success">✓ Attendance confirmed</p><button type="button" class="primary-button" [disabled]="confirmed" (click)="confirm()">{{ confirmed ? 'Confirmed' : 'Confirm appointment' }}</button><button type="button" class="secondary-button">Add to calendar</button><hr /><small>Online check-in opens {{ visit.checkInOpens }}.</small></aside>
+  </div>
+</main>
+<ng-template #missing><main class="detail-page"><h1>Appointment not found</h1><a routerLink="/appointments">Return to appointments</a></main></ng-template>

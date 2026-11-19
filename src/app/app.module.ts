@@ -13,6 +13,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { CoverageComponent } from './coverage/coverage.component';
 import { AuthorizationsModule } from './authorizations/authorizations.module';
 import { ProviderDirectoryModule } from './provider-directory/provider-directory.module';
+import { AppointmentsModule } from './appointments/appointments.module';
+import { MedicationsModule } from './medications/medications.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ProviderDirectoryModule } from './provider-directory/provider-directory
     FormsModule,
     AuthorizationsModule,
     ProviderDirectoryModule,
+    AppointmentsModule,
+    MedicationsModule,
     AppRoutingModule
   ],
   providers: [],
